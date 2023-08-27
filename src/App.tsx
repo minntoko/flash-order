@@ -68,13 +68,21 @@ const App = () => {
     }
   };
 
+  const reset = () => {
+    setIsAnser(false);
+    setIsCheck(false);
+    setIsFinish(false);
+    setMemo("");
+    setOrderNames([]);
+  }
+
   return (
     <div className="App">
       <header
         className="z-10 fixed drop-shadow-sm top-0 w-full bg-white text-blue-400 text-4xl py-3 pl-6"
         style={styles}
       >
-        Flash Order
+        <span className="cursor-pointer" onClick={reset}>Flash Order</span>
       </header>
       <div className="flex flex-col items-center pt-24 h-[100vh] bg-[#f9f9f9]">
         <div className="drop-shadow-md orderDispla h-32 w-[50vw] bg-blue-50 flex justify-center items-center text-3xl rounded-lg relative">
