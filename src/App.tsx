@@ -5,6 +5,7 @@ const App = () => {
     Math.floor(Math.random() * (max - min + 1)) + min;
   const [isAnswer, setIsAnser] = useState<boolean>(false);
   const [isCheck, setIsCheck] = useState<boolean>(false);
+  const [isStart, setIsStart] = useState<boolean>(false);
   const [isFinish, setIsFinish] = useState<boolean>(false);
   const [sec, setSec] = useState(1);
   const [memo, setMemo] = useState("");
@@ -23,10 +24,15 @@ const App = () => {
     "チャーハン",
     "ラーメン",
     "うどん",
+    "そば",
+    "お好み焼き",
+    "たこ焼き",
+    "エビフライ",
   ];
 
   const orderFood = async () => {
     setOrderList([]);
+    setIsStart(true);
     setIsFinish(false);
     const milliSecPerNumber = sec * 1000;
     for (let i = 0; i < orderNum; i++) {
@@ -38,6 +44,7 @@ const App = () => {
       setFood("");
       await new Promise((resolve) => setTimeout(resolve, 500));
     }
+    setIsStart(false);
     setIsFinish(true);
   };
   const handleAnswer = () => {
@@ -51,14 +58,13 @@ const App = () => {
       if (order === orderNames[index]) {
         count++;
       }
-    }
-    )
-    if(count === orderList.length) {
-      window.alert("全て正解です！おめでとうございます🎊")
+    });
+    if (count === orderList.length) {
+      window.alert("全て正解です！おめでとうございます🎊");
     } else if (count === 0) {
-      window.alert("全て不正解です…頑張りましょう💪")
+      window.alert("全て不正解です…頑張りましょう💪");
     } else {
-      window.alert(`正解数は${count}です`)
+      window.alert(`正解数は${count}です`);
     }
   };
 
@@ -96,7 +102,7 @@ const App = () => {
                 return (
                   <>
                     <div className="mt-3 flex justify-evenly" key={index}>
-                    <p className="max-h-[26px]">{index + 1}品目:{" "}</p>
+                      <p className="max-h-[26px]">{index + 1}品目: </p>
                       <input
                         className="border-b-2 border-slate-300 outline-none max-h-[26px]"
                         type="text"
@@ -109,8 +115,17 @@ const App = () => {
                       />
                       <p className="max-h-[26px]">がお一つ</p>
                       <div className="w-[180px]">
-                        {isCheck && (order === orderNames[index] ? ( <p className="text-green-500">正解 よくできました👏</p> ) : ( <p className="text-red-500">※間違っています</p>))}
-                        {isCheck && (order !== orderNames[index] && ( <p className="text-start">正解は{order}です</p>))}
+                        {isCheck &&
+                          (order === orderNames[index] ? (
+                            <p className="text-green-500">
+                              正解 よくできました👏
+                            </p>
+                          ) : (
+                            <p className="text-red-500">※間違っています</p>
+                          ))}
+                        {isCheck && order !== orderNames[index] && (
+                          <p className="text-start">正解は{order}です</p>
+                        )}
                       </div>
                     </div>
                   </>
@@ -121,11 +136,11 @@ const App = () => {
               <button
                 className="w-60 mx-auto bg-blue-500 text-white px-4 py-2 rounded-lg mt-8"
                 onClick={() => {
-                  setIsAnser(false)
-                  setIsCheck(false)
-                  setIsFinish(false)
-                  setMemo("")
-                  setOrderNames([])
+                  setIsAnser(false);
+                  setIsCheck(false);
+                  setIsFinish(false);
+                  setMemo("");
+                  setOrderNames([]);
                 }}
               >
                 トップへ
@@ -170,19 +185,25 @@ const App = () => {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col items-center h-[192px]">
+            <div className="flex flex-col items-center justify-center h-[192px]">
               <button
-                className="w-60 bg-blue-500 text-white px-4 py-2 rounded-lg mt-16"
-                onClick={orderFood}
+                className={`w-60 bg-blue-500 text-white px-4 py-2 rounded-lg mt-8 ${
+                  isStart && "opacity-70"
+                }`}
+                onClick={() => {
+                  !isStart && orderFood();
+                }}
               >
-                スタート
+                {isFinish ? "やり直す" : "スタート"}
               </button>
-              {isFinish && (<button
-                className="w-60 bg-green-500 text-white px-4 py-2 rounded-lg mt-8"
-                onClick={handleAnswer}
-              >
-                回答する
-              </button>)}
+              {isFinish && (
+                <button
+                  className="w-60 bg-green-500 text-white px-4 py-2 rounded-lg mt-8"
+                  onClick={handleAnswer}
+                >
+                  回答する
+                </button>
+              )}
             </div>
           </div>
         )}
