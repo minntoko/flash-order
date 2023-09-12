@@ -1,6 +1,6 @@
 {
   "name": "flash-order",
-  "homepage": "https://minntoko.com",
+  "homepage": "minntoko.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
