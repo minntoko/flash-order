@@ -1,4 +1,5 @@
 import { SetStateAction, useState } from "react";
+import Header from "./components/templates/Header";
 
 const App = () => {
   const getRandInt = (min: number, max: number) =>
@@ -78,12 +79,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <header
-        className="z-10 fixed drop-shadow-[0_1px_1px_rgba(255,255,255,0.5)] top-0 w-full bg-white/80 backdrop-blur-xl text-blue-400 text-4xl py-3 pl-6"
-        style={styles}
-      >
-        <span className="cursor-pointer" onClick={reset}>Flash Order</span>
-      </header>
+      <Header reset={reset} />
       <img className="absolute top-[0px] z-0 object-cover h-full w-full" src="https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2940&q=80" alt="" />
       <div className="backdrop-blur-md flex flex-col items-center pt-24 h-[100vh] bg-white/30">
         <div className="drop-shadow-md orderDispla h-32 w-[50vw] bg-blue-50/50 backdrop-blur-xl flex justify-center items-center text-3xl rounded-lg relative">
@@ -221,8 +217,6 @@ const App = () => {
   );
 };
 
-const styles = {
-  fontFamily: "Lilita One, cursive",
-};
+
 
 export default App;
