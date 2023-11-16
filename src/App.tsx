@@ -1,5 +1,6 @@
 import { SetStateAction, useState } from "react";
 import Header from "./components/templates/Header";
+import Memo from "./components/templates/Memo";
 
 const App = () => {
   const getRandInt = (min: number, max: number) =>
@@ -87,15 +88,7 @@ const App = () => {
             お客様のオーダー
           </p>
           <span className="flex justify-center items-center w-[90%] h-[60%] translate-y-3 bg-white/50 backdrop-blur-xl rounded-lg">{food}</span>
-          <div className="flex flex-col absolute top-40 right-[-260px] w-60 h-[434px] bg-blue-50/80 backdrop-blur-xl rounded-lg p-4">
-            <h2 className="text-xl text-center">メモ📝</h2>
-            <textarea
-              className="rounded-md h-full mt-4 outline-none p-2 resize-none text-sm bg-white/50 backdrop-blur-xl"
-              placeholder="オーダーをメモ"
-              onChange={(e) => setMemo(e.target.value)}
-              value={memo}
-            ></textarea>
-          </div>
+          <Memo memo={memo} setMemo={setMemo} />
         </div>
         {isAnswer ? (
           <div className="flex flex-col drop-shadow-md orderDispla w-[50vw] h-[434px] mt-8 bg-white/50 backdrop-blur-xl p-10 rounded-lg relative">
