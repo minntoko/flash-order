@@ -75,7 +75,7 @@ const Home = () => {
               </SFood>
             ))}
           </SMenu>
-          <SLink to="/game" selected={true}>プレイする</SLink>
+          <SLink to="/select" selected={true}>プレイする</SLink>
         </SMenuContainer>
       </SMain>
     </SContainer>
