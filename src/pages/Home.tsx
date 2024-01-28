@@ -138,7 +138,7 @@ const SButton = styled.button<{ selected: boolean }>`
   font-size: 1.3rem;
   color: #fff;
   background-color: #db6b5d;
-  opacity: 0.6;
+  opacity: 0.7;
   border-radius: 99px;
   border: 1px solid #bbb;
   white-space: nowrap;
@@ -186,7 +186,6 @@ const SFood = styled.div`
   font-size: 1.3rem;
   border-radius: 8px;
 `;
-
 
 const SLink = styled(Link)<{ selected: boolean }>`
   padding: 16px 80px;
