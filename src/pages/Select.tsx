@@ -1,48 +1,43 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
+import BackButton from "../components/button/BackButton";
+import { SLink } from "../components/button/MainButton";
+import { SContainer } from "../components/bg/Container";
 
 const Select = () => {
   const orderTimes = [
-    { time: "3.0秒" },
-    { time: "2.0秒" },
-    { time: "1.0秒" },
-    { time: "0.5秒" },
+    { time: 3.0 },
+    { time: 2.0 },
+    { time: 1.0 },
+    { time: 0.5 },
   ];
 
   const orderCounts = [
-    { count: "5個" },
-    { count: "7個" },
-    { count: "10個" },
-    { count: "15個" },
+    { count: 5 },
+    { count: 7 },
+    { count: 10 },
+    { count: 15 },
   ];
 
   const [selectedOrderTime, setSelectedOrderTime] = useState({
-    time: "3.0秒",
+    time: 3,
   });
   const [selectedOrderCount, setSelectedOrderCount] = useState({
-    count: "5個",
+    count: 5,
   });
 
-  const handleOrderTimeClick = (orderTime: string) => {
+  const handleOrderTimeClick = (orderTime: number) => {
     setSelectedOrderTime({ time: orderTime });
   };
 
-  const handleOrderCountClick = (orderCount: string) => {
+  const handleOrderCountClick = (orderCount: number) => {
     setSelectedOrderCount({ count: orderCount });
   };
 
   return (
     <SContainer>
       <SHeader>
-        <SBackButton to="/">
-          <SBoard>
-            <STopBoard />
-            <SCircle />
-            <SBackLabel>ホームに戻る</SBackLabel>
-            <SBottomBoard />
-          </SBoard>
-        </SBackButton>
+        <BackButton />
       </SHeader>
       <SMain>
         <SDecorationLine />
@@ -55,7 +50,7 @@ const Select = () => {
                 selected={orderTime.time === selectedOrderTime.time}
                 onClick={() => handleOrderTimeClick(orderTime.time)}
               >
-                {orderTime.time}
+                {orderTime.time}秒
               </SButton>
             ))}
           </SOrderTimeContainer>
@@ -67,13 +62,17 @@ const Select = () => {
                 selected={orderCount.count === selectedOrderCount.count}
                 onClick={() => handleOrderCountClick(orderCount.count)}
               >
-                {orderCount.count}
+                {orderCount.count}個
               </SButton>
             ))}
           </SOrderCountContainer>
         </SCenterLine>
         <SDecorationLine />
-        <SLink to="/game" selected={true}>
+        <SLink
+          to="/game"
+          selected={true}
+          state={{ ...selectedOrderTime, ...selectedOrderCount }}
+        >
           ご注文お伺いします
         </SLink>
       </SMain>
@@ -81,65 +80,9 @@ const Select = () => {
   );
 };
 
-const SContainer = styled.div`
-  background-color: #f4f1ec;
-  height: 100vh;
-  width: 100vw;
-`;
 
 const SHeader = styled.header`
   padding-top: 20px;
-`;
-
-const SBackButton = styled(Link)`
-  text-decoration: none;
-  color: #fff;
-  font-weight: bold;
-  font-size: 1.4rem;
-`;
-
-const SBoard = styled.div`
-  background-color: #dba15d;
-  padding: 24px;
-  width: 300px;
-  border-radius: 0 16px 16px 0;
-  text-align: center;
-  position: relative;
-`;
-
-const STopBoard = styled.div`
-  width: 50px;
-  height: 20px;
-  background-color: #f4f1ec;
-  border-radius: 0 0 20px 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-`;
-
-const SBottomBoard = styled.div`
-  width: 50px;
-  height: 20px;
-  background-color: #f4f1ec;
-  border-radius: 0 20px 0 0;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-`;
-
-const SCircle = styled.div`
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background-color: #f4f1ec;
-  position: absolute;
-  top: 50%;
-  left: 17px;
-  transform: translateY(-50%);
-`;
-
-const SBackLabel = styled.span`
-  margin-left: 32px;
 `;
 
 const SMain = styled.main`
@@ -203,25 +146,6 @@ const SButton = styled.button<{ selected: boolean }>`
   opacity: 0.7;
   transition: all 0.2s ease-in-out;
   color: #fff;
-  ${(props) => props.selected && "opacity: 1;"}
-  &:hover {
-    opacity: 1;
-  }
-`;
-
-const SLink = styled(Link)<{ selected: boolean }>`
-  padding: 16px 80px;
-  margin-top: 50px;
-  font-size: 1.3rem;
-  color: #fff;
-  background-color: #db6b5d;
-  opacity: 0.6;
-  border-radius: 99px;
-  border: 1px solid #bbb;
-  white-space: nowrap;
-  text-decoration: none;
-  transition: all 0.2s ease-in-out;
-  cursor: pointer;
   ${(props) => props.selected && "opacity: 1;"}
   &:hover {
     opacity: 1;
