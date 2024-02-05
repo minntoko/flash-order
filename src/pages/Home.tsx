@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-
-interface Menu {
-  foodName: string;
-}
+import { Menu } from "../types/menu";
 
 const Home = () => {
   const [mode, setMode] = useState("初心者モード");
@@ -16,7 +13,7 @@ const Home = () => {
       const json = await result.json();
       setMenus(json); // menusを更新
     } catch (error) {
-      console.error('Error fetching menu: ', error);
+      console.error("Error fetching menu: ", error);
     }
   };
   const fetchBeginnerMenu = async () => {
@@ -25,19 +22,19 @@ const Home = () => {
       const json = await result.json();
       setMenus(json); // menusを更新
     } catch (error) {
-      console.error('Error fetching menu: ', error);
+      console.error("Error fetching menu: ", error);
     }
   };
 
   const handleAdvanceClick = () => {
     setMode("上級者モード");
     fetchAdvanceMenu();
-  }
+  };
 
   const handleBeginnerClick = () => {
     setMode("初心者モード");
     fetchBeginnerMenu();
-  }
+  };
 
   useEffect(() => {
     fetchBeginnerMenu();
@@ -71,11 +68,14 @@ const Home = () => {
           <SMenu>
             {menus.map((menu) => (
               <SFood key={menu.foodName}>
-                <p>{menu.foodName}</p>
+                <SFoodImage src={menu.foodImage} alt="" />
+                <SFoodName>{menu.foodName}</SFoodName>
               </SFood>
             ))}
           </SMenu>
-          <SLink to="/select" selected={true}>プレイする</SLink>
+          <SLink to="/select" selected={true}>
+            プレイする
+          </SLink>
         </SMenuContainer>
       </SMain>
     </SContainer>
@@ -179,12 +179,25 @@ const SMenu = styled.div`
 const SFood = styled.div`
   display: block;
   padding: 16px;
-  min-height: 100px;
   border: solid 2px #dba15d;
   color: #333;
-  background-color: #ffa21f3e;
   font-size: 1.3rem;
   border-radius: 8px;
+  width: 252px;
+  height: 152px;
+`;
+
+const SFoodImage = styled.img`
+  display: block;
+  margin: 0 auto 8px;
+  width: 100px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+`;
+
+const SFoodName = styled.p`
+  text-align: center;
 `;
 
 const SLink = styled(Link)<{ selected: boolean }>`
