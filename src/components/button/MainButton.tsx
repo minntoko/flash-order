@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 
 export const SLink = styled(Link)<{ selected: boolean }>`
+  display: inline-block;
   padding: 16px 80px;
   margin-top: 50px;
   font-size: 1.3rem;
