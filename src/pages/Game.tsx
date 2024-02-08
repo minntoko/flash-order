@@ -13,10 +13,10 @@ const Game = () => {
   const location = useLocation();
   const state = location.state;
   const [orderCount, setOrderCount] = useState(1);
+  const [countdown, setCountdown] = useState(3);
   const [start, setStart] = useState(false);
   const [end, setEnd] = useState(false);
   const [display, setDisplay] = useState(true);
-  const [count, setCount] = useState(3);
   const [mode] = useMode();
   const [displayMenu, setDisplayMenu] = useState<Menu>({
     foodName: "",
@@ -43,7 +43,7 @@ const Game = () => {
 
       await new Promise<void>((resolve) => {
         const startCount = setInterval(() => {
-          setCount((prevCount) => {
+          setCountdown((prevCount) => {
             if (prevCount <= 0) {
               setStart(true);
               clearInterval(startCount);
@@ -109,7 +109,7 @@ const Game = () => {
             </SGameScreen>
           ) : (
             <SPrepareScreen>
-              <h2>{count > 0 ? count : "GO"}</h2>
+              <h2>{countdown > 0 ? countdown : "GO"}</h2>
             </SPrepareScreen>
           )}
           <SMemo>
