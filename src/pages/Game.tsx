@@ -5,6 +5,9 @@ import BackButton from "../components/button/BackButton";
 import { SLink } from "../components/button/MainButton";
 import { useEffect, useState } from "react";
 import { Menu } from "../types/menu";
+import SPrepareScreen from "../views/game/PrepareScreen";
+import getRandomNumber from "../utils/getRandomNumber";
+import { useMode } from "../providers/ModeProvider";
 
 const Game = () => {
   const location = useLocation();
@@ -14,17 +17,13 @@ const Game = () => {
   const [end, setEnd] = useState(false);
   const [display, setDisplay] = useState(true);
   const [count, setCount] = useState(3);
+  const [mode] = useMode();
   const [displayMenu, setDisplayMenu] = useState<Menu>({
     foodName: "",
     foodImage: "src/assets/foodImages/default.jpeg",
   });
 
-  const getRandomNumber = (max: number) => {
-    return Math.floor(Math.random() * max);
-  };
-
   const fetchMenu: () => Promise<Menu[] | undefined> = async () => {
-    let mode = "上級者モード";
     try {
       const result = await fetch(
         mode === "上級者モード"
@@ -32,7 +31,7 @@ const Game = () => {
           : "src/assets/beginnerMenu.json"
       );
       const json = await result.json();
-      return json as Menu[]
+      return json as Menu[];
     } catch (error) {
       console.error("Error fetching menu: ", error);
     }
@@ -40,8 +39,8 @@ const Game = () => {
   useEffect(() => {
     const fetchData = async () => {
       const menusJson = await fetchMenu();
-      if (!menusJson) return
- 
+      if (!menusJson) return;
+
       await new Promise<void>((resolve) => {
         const startCount = setInterval(() => {
           setCount((prevCount) => {
@@ -68,18 +67,17 @@ const Game = () => {
           const newRandomNumber = getRandomNumber(menusJson.length);
           setDisplayMenu(menusJson[newRandomNumber]);
           if (newCount == state.count) {
-            const token = setTimeout(()=>{
+            const token = setTimeout(() => {
               setEnd(true);
               clearInterval(token);
-            }, state.time * 1000 + 200)
-            clearInterval(orderInterval)
+            }, state.time * 1000 + 200);
+            clearInterval(orderInterval);
           }
           return newCount;
         });
         setTimeout(() => {
           setDisplay(false);
         }, state.time * 1000 - 200);
-        
       }, state.time * 1000 + 200);
     };
 
@@ -120,9 +118,15 @@ const Game = () => {
           </SMemo>
         </SFlex>
         <SBottomButton>
-          <SLink to="/select" selected={true}>
-            選択画面に戻る
-          </SLink>
+          {end ? (
+            <SLink to="/result" selected={true}>
+              以上でよろしいでしょうか
+            </SLink>
+          ) : (
+            <SLink to="/select" selected={true}>
+              選択画面に戻る
+            </SLink>
+          )}
         </SBottomButton>
       </SMain>
     </SContainer>
@@ -138,7 +142,7 @@ const SMain = styled.div`
   flex-direction: column;
   justify-content: center;
   max-width: 1200px;
-  height: calc(100vh - 120px);
+  height: calc(100vh - 101px);
   margin: 0 auto;
 `;
 
@@ -146,19 +150,6 @@ const SFlex = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-`;
-
-const SPrepareScreen = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 700px;
-  height: 450px;
-  padding: 16px;
-  background-color: #fff;
-  border-radius: 16px;
-  font-size: 4.5rem;
-  color: #333;
 `;
 
 const SGameScreen = styled.div`
@@ -223,6 +214,10 @@ const SMemoArea = styled.textarea`
   margin-top: 16px;
   border-radius: 8px;
   border: 2px dashed #ccc;
+  outline: none;
+  :focus {
+    border: 2px solid #ccc;
+  }
 `;
 
 export default Game;

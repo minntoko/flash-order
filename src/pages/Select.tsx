@@ -90,7 +90,7 @@ const SMain = styled.main`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: calc(100vh - 151px);
+  height: calc(100vh - 101px);
   width: 100vw;
 `;
 

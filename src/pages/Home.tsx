@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Menu } from "../types/menu";
+import { useMode } from "../providers/ModeProvider";
 
 const Home = () => {
-  const [mode, setMode] = useState("初心者モード");
   const [menus, setMenus] = useState<Menu[]>([]);
-
+  const [mode, setMode] = useMode();
   const fetchAdvanceMenu = async () => {
     try {
       const result = await fetch("src/assets/advanceMenu.json");
