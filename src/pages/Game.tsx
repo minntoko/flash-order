@@ -8,6 +8,9 @@ import { Menu } from "../types/menu";
 import SPrepareScreen from "../views/game/PrepareScreen";
 import getRandomNumber from "../utils/getRandomNumber";
 import { useMode } from "../providers/ModeProvider";
+import { startCountdown } from "../views/game/utils/countdown";
+import orderRepeat from "../views/game/utils/orderRepeat";
+import firstOrder from "../views/game/utils/firstOrder";
 
 const Game = () => {
   const location = useLocation();
@@ -22,6 +25,7 @@ const Game = () => {
     foodName: "",
     foodImage: "src/assets/foodImages/default.jpeg",
   });
+  const correctMenus: string[] = [];
 
   const fetchMenu: () => Promise<Menu[] | undefined> = async () => {
     try {
@@ -40,45 +44,27 @@ const Game = () => {
     const fetchData = async () => {
       const menusJson = await fetchMenu();
       if (!menusJson) return;
+      await startCountdown(setCountdown, setStart);
 
-      await new Promise<void>((resolve) => {
-        const startCount = setInterval(() => {
-          setCountdown((prevCount) => {
-            if (prevCount <= 0) {
-              setStart(true);
-              clearInterval(startCount);
-              resolve();
-            }
-            return prevCount - 1;
-          });
-        }, 1000);
-      });
+      firstOrder(
+        getRandomNumber,
+        menusJson,
+        setDisplayMenu,
+        correctMenus,
+        setDisplay,
+        state
+      );
 
-      const newRandomNumber: number = getRandomNumber(menusJson.length);
-      setDisplayMenu(menusJson[newRandomNumber]);
-      setTimeout(() => {
-        setDisplay(false);
-      }, state.time * 1000 - 200);
-      const orderInterval = setInterval(() => {
-        setDisplay(true);
-        setOrderCount((prevCount) => {
-          const newCount = prevCount + 1;
-          // ランダムな数字を生成
-          const newRandomNumber = getRandomNumber(menusJson.length);
-          setDisplayMenu(menusJson[newRandomNumber]);
-          if (newCount == state.count) {
-            const token = setTimeout(() => {
-              setEnd(true);
-              clearInterval(token);
-            }, state.time * 1000 + 200);
-            clearInterval(orderInterval);
-          }
-          return newCount;
-        });
-        setTimeout(() => {
-          setDisplay(false);
-        }, state.time * 1000 - 200);
-      }, state.time * 1000 + 200);
+      orderRepeat(
+        setDisplay,
+        setOrderCount,
+        getRandomNumber,
+        setDisplayMenu,
+        menusJson,
+        correctMenus,
+        state,
+        setEnd
+      );
     };
 
     fetchData();
