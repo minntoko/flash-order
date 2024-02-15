@@ -1,0 +1,26 @@
+[
+  {
+    "foodName": "ちゃんぽん",
+    "foodImage": "src/assets/foodImages/chanpon.jpg"
+  },
+  {
+    "foodName": "ラーメン",
+    "foodImage": "src/assets/foodImages/ramen.jpg" 
+  },
+  {
+    "foodName": "チャーハン",
+    "foodImage": "src/assets/foodImages/chahan.jpg" 
+  },
+  {
+    "foodName": "焼きそば",
+    "foodImage": "src/assets/foodImages/yakisoba.jpg" 
+  },
+  {
+    "foodName": "麻婆豆腐",
+    "foodImage": "src/assets/foodImages/mapodofu.jpg" 
+  },
+  {
+    "foodName": "餃子",
+    "foodImage": "src/assets/foodImages/gyoza.jpg"
+  }
+]
