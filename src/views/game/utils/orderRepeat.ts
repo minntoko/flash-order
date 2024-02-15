@@ -17,7 +17,7 @@ const orderRepeat = (
           const newRandomNumber = getRandomNumber(menusJson.length);
           const correctMenu = menusJson[newRandomNumber];
           setDisplayMenu(correctMenu);
-          setCorrectMenus((prev: any) => ({ ...prev, [newCount]: correctMenu.foodName }));
+          setCorrectMenus((prev) => ({ ...prev, [newCount]: correctMenu.foodName }));
           if (newCount == state.count) {
               setTimeout(() => {
                   setEnd(true);

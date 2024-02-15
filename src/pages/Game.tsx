@@ -81,7 +81,7 @@ const Game = () => {
         <SFlex>
           {start ? (
             <SGameScreen>
-              <h2>お客様のオーダー</h2>
+              {!end ? <h2>お客様のオーダー</h2> : <h2>それではご注文を復唱させていただきます</h2>}
               <SGameArea>
                 {display && !end && (
                   <>
@@ -117,7 +117,7 @@ const Game = () => {
             <SLink
               to="/result"
               selected={true}
-              state={{ ...inputs, correctMenus }}
+              state={{ inputs, correctMenus, "orderCount": state.count }}
             >
               以上でよろしいでしょうか
             </SLink>
