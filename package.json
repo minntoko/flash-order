@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://minntoko.com",
+  "homepage": "https://flash-order.minntoko.com",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
