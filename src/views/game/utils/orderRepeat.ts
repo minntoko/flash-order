@@ -6,7 +6,7 @@ const orderRepeat = (
   getRandomNumber: (length: number) => number,
   setDisplayMenu: React.Dispatch<React.SetStateAction<Menu>>,
   menusJson: Menu[],
-  correctMenus: string[],
+  setCorrectMenus: React.Dispatch<React.SetStateAction<{ [key: number]: string }>>,
   state: { count: number, time: number },
   setEnd: (value: boolean) => void
 ) => {
@@ -17,11 +17,11 @@ const orderRepeat = (
           const newRandomNumber = getRandomNumber(menusJson.length);
           const correctMenu = menusJson[newRandomNumber];
           setDisplayMenu(correctMenu);
-          correctMenus.push(correctMenu.foodName);
+          setCorrectMenus((prev: any) => ({ ...prev, [newCount]: correctMenu.foodName }));
           if (newCount == state.count) {
               setTimeout(() => {
                   setEnd(true);
-              }, state.time * 1000 + 300);
+              }, state.time * 1000 + 400);
               clearInterval(orderInterval);
           }
           return newCount;
@@ -29,7 +29,7 @@ const orderRepeat = (
       setTimeout(() => {
         setDisplay(false);
       }, state.time * 1000);
-  }, state.time * 1000 + 300);
+  }, state.time * 1000 + 400);
 }
 
 export default orderRepeat;

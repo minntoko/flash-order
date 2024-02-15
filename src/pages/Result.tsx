@@ -2,8 +2,12 @@ import styled from "styled-components";
 import { SContainer } from "../components/bg/Container";
 import BackButton from "../components/button/BackButton";
 import { SLink } from "../components/button/MainButton";
+import { useLocation } from "react-router-dom";
 
 const Result = () => {
+  const location = useLocation();
+  const state = location.state;
+  console.log(state);
   return (
     <SContainer>
       <SHeader>

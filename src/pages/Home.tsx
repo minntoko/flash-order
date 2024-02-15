@@ -37,7 +37,11 @@ const Home = () => {
   };
 
   useEffect(() => {
-    fetchBeginnerMenu();
+    if(mode == "上級者モード") {
+      fetchAdvanceMenu();
+    } else {
+      fetchBeginnerMenu();
+    }
   }, []);
 
   return (

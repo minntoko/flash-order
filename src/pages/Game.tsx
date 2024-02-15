@@ -11,21 +11,25 @@ import { useMode } from "../providers/ModeProvider";
 import { startCountdown } from "../views/game/utils/countdown";
 import orderRepeat from "../views/game/utils/orderRepeat";
 import firstOrder from "../views/game/utils/firstOrder";
+import { defaultCountdown, defaultOrderCount } from "../constants/gameSetting";
+import Confirm from "../views/game/components/Confirm";
 
 const Game = () => {
   const location = useLocation();
   const state = location.state;
-  const [orderCount, setOrderCount] = useState(1);
-  const [countdown, setCountdown] = useState(3);
-  const [start, setStart] = useState(false);
-  const [end, setEnd] = useState(false);
-  const [display, setDisplay] = useState(true);
+
+  const [orderCount, setOrderCount] = useState<number>(defaultOrderCount);
+  const [inputs, setInputs] = useState<{ [key: number]: string }>({});
+  const [countdown, setCountdown] = useState<number>(defaultCountdown);
+  const [start, setStart] = useState<boolean>(false);
+  const [end, setEnd] = useState<boolean>(false);
+  const [display, setDisplay] = useState<boolean>(true);
   const [mode] = useMode();
   const [displayMenu, setDisplayMenu] = useState<Menu>({
     foodName: "",
     foodImage: "src/assets/foodImages/default.jpeg",
   });
-  const correctMenus: string[] = [];
+  const [correctMenus, setCorrectMenus] = useState<{ [key: number]: string }>([]);
 
   const fetchMenu: () => Promise<Menu[] | undefined> = async () => {
     try {
@@ -40,33 +44,32 @@ const Game = () => {
       console.error("Error fetching menu: ", error);
     }
   };
+  const fetchData = async () => {
+    const menusJson = await fetchMenu();
+    if (!menusJson) return;
+    await startCountdown(setCountdown, setStart);
+
+    firstOrder(
+      getRandomNumber,
+      menusJson,
+      setDisplayMenu,
+      setCorrectMenus,
+      setDisplay,
+      state
+    );
+
+    orderRepeat(
+      setDisplay,
+      setOrderCount,
+      getRandomNumber,
+      setDisplayMenu,
+      menusJson,
+      setCorrectMenus,
+      state,
+      setEnd
+    );
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      const menusJson = await fetchMenu();
-      if (!menusJson) return;
-      await startCountdown(setCountdown, setStart);
-
-      firstOrder(
-        getRandomNumber,
-        menusJson,
-        setDisplayMenu,
-        correctMenus,
-        setDisplay,
-        state
-      );
-
-      orderRepeat(
-        setDisplay,
-        setOrderCount,
-        getRandomNumber,
-        setDisplayMenu,
-        menusJson,
-        correctMenus,
-        state,
-        setEnd
-      );
-    };
-
     fetchData();
   }, []);
   return (
@@ -90,7 +93,13 @@ const Game = () => {
                     />
                   </>
                 )}
-                {!display && end && <h2>お疲れ様でした！</h2>}
+                {!display && end && (
+                  <Confirm
+                    orderCount={state.count}
+                    inputs={inputs}
+                    setInputs={setInputs}
+                  />
+                )}
               </SGameArea>
             </SGameScreen>
           ) : (
@@ -105,7 +114,11 @@ const Game = () => {
         </SFlex>
         <SBottomButton>
           {end ? (
-            <SLink to="/result" selected={true}>
+            <SLink
+              to="/result"
+              selected={true}
+              state={{ ...inputs, correctMenus }}
+            >
               以上でよろしいでしょうか
             </SLink>
           ) : (
