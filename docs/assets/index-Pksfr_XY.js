@@ -180,7 +180,7 @@ Error generating stack: `+o.message+`
   transition: all 0.2s ease-in-out;
   cursor: pointer;
   ${e=>e.selected&&"opacity: 1;"}
-`,Gv=()=>{const t=Kn().state,[n,r]=P.useState(Uv),[l,o]=P.useState({}),[i,u]=P.useState(Av),[s,a]=P.useState(!1),[p,h]=P.useState(!1),[m,v]=P.useState(!0),[y]=Jd(),[w,_]=P.useState({foodName:"",foodImage:"src/assets/foodImages/default.jpeg"}),[f,c]=P.useState([]),d=async()=>{try{return await(await fetch(y==="上級者モード"?"src/assets/advanceMenu.json":"src/assets/beginnerMenu.json")).json()}catch(S){console.error("Error fetching menu: ",S)}},g=async()=>{const S=await d();S&&(await Mv(u,a),Fv(Za,S,_,c,v,t),Dv(v,r,Za,_,S,c,t,h))};return P.useEffect(()=>{g()},[]),x.jsxs(gs,{children:[x.jsx(Yv,{children:x.jsx(ys,{})}),x.jsxs(Xv,{children:[x.jsxs(Zv,{children:[s?x.jsxs(Jv,{children:[p?x.jsx("h2",{children:"それではご注文を復唱させていただきます"}):x.jsx("h2",{children:"お客様のオーダー"}),x.jsxs(qv,{children:[m&&!p&&x.jsxs(x.Fragment,{children:[x.jsxs(bv,{children:[n,"品目"]}),x.jsx(t1,{children:w.foodName}),x.jsx(e1,{src:w.foodImage,alt:w.foodName})]}),!m&&p&&x.jsx(Bv,{orderCount:t.count,inputs:l,setInputs:o})]})]}):x.jsx(Ov,{children:x.jsx("h2",{children:i>0?i:"GO"})}),x.jsxs(n1,{children:[x.jsx("h2",{children:"メモ📝"}),x.jsx(l1,{placeholder:"オーダーをメモ"})]})]}),x.jsx(r1,{children:p?x.jsx(io,{to:"/result",selected:!0,state:{inputs:l,correctMenus:f,orderCount:t.count},children:"以上でよろしいでしょうか"}):x.jsx(io,{to:"/select",selected:!0,children:"選択画面に戻る"})})]})]})},Yv=z.header`
+`,Gv=()=>{const t=Kn().state,[n,r]=P.useState(Uv),[l,o]=P.useState({}),[i,u]=P.useState(Av),[s,a]=P.useState(!1),[p,h]=P.useState(!1),[m,v]=P.useState(!0),[y]=Jd(),[w,_]=P.useState({foodName:"",foodImage:"src/assets/foodImages/default.jpeg"}),[f,c]=P.useState([]),d=async()=>{try{return await(await fetch(y==="上級者モード"?"../assets/advancedMenu.json":"../assets/beginnerMenu.json")).json()}catch(S){console.error("Error fetching menu: ",S)}},g=async()=>{const S=await d();S&&(await Mv(u,a),Fv(Za,S,_,c,v,t),Dv(v,r,Za,_,S,c,t,h))};return P.useEffect(()=>{g()},[]),x.jsxs(gs,{children:[x.jsx(Yv,{children:x.jsx(ys,{})}),x.jsxs(Xv,{children:[x.jsxs(Zv,{children:[s?x.jsxs(Jv,{children:[p?x.jsx("h2",{children:"それではご注文を復唱させていただきます"}):x.jsx("h2",{children:"お客様のオーダー"}),x.jsxs(qv,{children:[m&&!p&&x.jsxs(x.Fragment,{children:[x.jsxs(bv,{children:[n,"品目"]}),x.jsx(t1,{children:w.foodName}),x.jsx(e1,{src:w.foodImage,alt:w.foodName})]}),!m&&p&&x.jsx(Bv,{orderCount:t.count,inputs:l,setInputs:o})]})]}):x.jsx(Ov,{children:x.jsx("h2",{children:i>0?i:"GO"})}),x.jsxs(n1,{children:[x.jsx("h2",{children:"メモ📝"}),x.jsx(l1,{placeholder:"オーダーをメモ"})]})]}),x.jsx(r1,{children:p?x.jsx(io,{to:"/result",selected:!0,state:{inputs:l,correctMenus:f,orderCount:t.count},children:"以上でよろしいでしょうか"}):x.jsx(io,{to:"/select",selected:!0,children:"選択画面に戻る"})})]})]})},Yv=z.header`
   padding-top: 20px;
 `,Xv=z.div`
   display: flex;
@@ -357,8 +357,8 @@ Error generating stack: `+o.message+`
   &:first-of-type {
     margin-top: 0;
   }
-`,w1=()=>{const e=Kn(),{inputs:t={},correctMenus:n={},orderCount:r=0}=e.state,l=[];let o=0;for(const i in n)t[i]===n[i]?(l.push(!0),o++):l.push(!1);return x.jsxs(gs,{children:[x.jsx(x1,{children:x.jsx(ys,{})}),x.jsxs(S1,{children:[x.jsxs(k1,{children:[x.jsx("h1",{children:"結果"}),x.jsxs(C1,{children:[x.jsxs("h2",{children:[r,"問中",o,"問正解です。"]}),x.jsx(E1,{children:l.map((i,u)=>x.jsx(x.Fragment,{children:x.jsxs(_1,{children:[x.jsx("div",{children:`${u+1}品目:
-                      ${t[u+1]??"オーダーが"}`}),i?x.jsx(N1,{children:"正解、よくできました👏"}):x.jsxs("div",{children:[x.jsx(P1,{children:"※違います"}),"、正解は",x.jsx(j1,{children:n[u+1]}),"です"]})]})}))})]})]}),x.jsx(io,{to:"/select",selected:!0,children:"選択画面に戻る"})]})]})},x1=z.header`
+`,w1=()=>{const e=Kn(),{inputs:t={},correctMenus:n={},orderCount:r=0}=e.state,l=[];let o=0;for(const i in n)t[i]===n[i]?(l.push(!0),o++):l.push(!1);return x.jsxs(gs,{children:[x.jsx(x1,{children:x.jsx(ys,{})}),x.jsxs(S1,{children:[x.jsxs(k1,{children:[x.jsx("h1",{children:"結果"}),x.jsxs(C1,{children:[x.jsxs(E1,{children:[r,"問中",o,"問正解です。"]}),x.jsx(_1,{children:l.map((i,u)=>x.jsx(x.Fragment,{children:x.jsxs(P1,{children:[x.jsx("div",{children:`${u+1}品目:
+                      ${t[u+1]??"オーダーが"}`}),i?x.jsx(j1,{children:"正解、よくできました👏"}):x.jsxs("div",{children:[x.jsx(N1,{children:"※違います"}),"、正解は",x.jsx(R1,{children:n[u+1]}),"です"]})]})}))})]})]}),x.jsx(io,{to:"/select",selected:!0,children:"選択画面に戻る"})]})]})},x1=z.header`
   padding-top: 20px;
 `,S1=z.main`
   display: flex;
@@ -381,30 +381,32 @@ Error generating stack: `+o.message+`
   width: 100%;
   height: 350px;
   margin-top: 16px;
-  padding: 16px;
   border-radius: 8px;
   border: 2px dashed #ccc;
-`,E1=z.div`
+`,E1=z.h2`
+  padding: 16px 0 0 16px;
+`,_1=z.div`
   display: flex;
   width: 100%;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   margin-top: 16px;
-`,_1=z.div`
+  overflow: scroll;
+`,P1=z.div`
   display: flex;
   justify-content: space-between;
   width: 500px;
   margin: 16px auto 8px;
-`,P1=z.span`
-  color: red;
 `,N1=z.span`
-  color: #22c55e;
+  color: red;
 `,j1=z.span`
+  color: #22c55e;
+`,R1=z.span`
   font-size: 1.2rem;
-`,R1=()=>{const e=[{time:3},{time:2},{time:1},{time:.5}],t=[{count:5},{count:7},{count:10},{count:15}],[n,r]=P.useState({time:3}),[l,o]=P.useState({count:5}),i=s=>{r({time:s})},u=s=>{o({count:s})};return x.jsxs(gs,{children:[x.jsx(z1,{children:x.jsx(ys,{})}),x.jsxs(T1,{children:[x.jsx(ba,{}),x.jsxs(L1,{children:[x.jsxs($1,{children:[x.jsx(ec,{children:"注文時間/1品"}),e.map(s=>x.jsxs(tc,{selected:s.time===n.time,onClick:()=>i(s.time),children:[s.time,"秒"]},s.time))]}),x.jsxs(O1,{children:[x.jsx(ec,{children:"注文数"}),t.map(s=>x.jsxs(tc,{selected:s.count===l.count,onClick:()=>u(s.count),children:[s.count,"個"]},s.count))]})]}),x.jsx(ba,{}),x.jsx(io,{to:"/game",selected:!0,state:{...n,...l},children:"ご注文お伺いします"})]})]})},z1=z.header`
+`,z1=()=>{const e=[{time:3},{time:2},{time:1},{time:.5}],t=[{count:5},{count:7},{count:10},{count:15}],[n,r]=P.useState({time:3}),[l,o]=P.useState({count:5}),i=s=>{r({time:s})},u=s=>{o({count:s})};return x.jsxs(gs,{children:[x.jsx(T1,{children:x.jsx(ys,{})}),x.jsxs(L1,{children:[x.jsx(ba,{}),x.jsxs($1,{children:[x.jsxs(O1,{children:[x.jsx(ec,{children:"注文時間/1品"}),e.map(s=>x.jsxs(tc,{selected:s.time===n.time,onClick:()=>i(s.time),children:[s.time,"秒"]},s.time))]}),x.jsxs(I1,{children:[x.jsx(ec,{children:"注文数"}),t.map(s=>x.jsxs(tc,{selected:s.count===l.count,onClick:()=>u(s.count),children:[s.count,"個"]},s.count))]})]}),x.jsx(ba,{}),x.jsx(io,{to:"/game",selected:!0,state:{...n,...l},children:"ご注文お伺いします"})]})]})},T1=z.header`
   padding-top: 20px;
-`,T1=z.main`
+`,L1=z.main`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -415,19 +417,19 @@ Error generating stack: `+o.message+`
   width: 100%;
   height: 16px;
   background-color: #fff;
-`,L1=z.div`
+`,$1=z.div`
   width: 100%;
   padding: 50px 0;
   margin: 40px 0;
   background-color: #fff;
-`,$1=z.div`
+`,O1=z.div`
   display: flex;
   justify-content: start;
   align-items: center;
   width: 50%;
   padding: 25px;
   margin: 0 auto;
-`,O1=z.div`
+`,I1=z.div`
   display: flex;
   justify-content: start;
   align-items: center;
@@ -457,4 +459,4 @@ Error generating stack: `+o.message+`
   &:hover {
     opacity: 1;
   }
-`;function I1(){return x.jsx(x.Fragment,{children:x.jsxs(v0,{children:[x.jsx(sr,{path:"/",element:x.jsx(o1,{})}),x.jsx(sr,{path:"/select",element:x.jsx(R1,{})}),x.jsx(sr,{path:"/game",element:x.jsx(Gv,{})}),x.jsx(sr,{path:"/result",element:x.jsx(w1,{})})]})})}ci.createRoot(document.getElementById("root")).render(x.jsx(k0,{children:x.jsx(Iv,{children:x.jsx(I1,{})})}));
+`;function M1(){return x.jsx(x.Fragment,{children:x.jsxs(v0,{children:[x.jsx(sr,{path:"/",element:x.jsx(o1,{})}),x.jsx(sr,{path:"/select",element:x.jsx(z1,{})}),x.jsx(sr,{path:"/game",element:x.jsx(Gv,{})}),x.jsx(sr,{path:"/result",element:x.jsx(w1,{})})]})})}ci.createRoot(document.getElementById("root")).render(x.jsx(k0,{children:x.jsx(Iv,{children:x.jsx(M1,{})})}));
