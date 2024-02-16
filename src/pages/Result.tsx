@@ -29,9 +29,9 @@ const Result = () => {
         <SResultScreen>
           <h1>結果</h1>
           <SScoreContainer>
-            <h2>
+            <SScoreTitle>
               {orderCount}問中{correctCount}問正解です。
-            </h2>
+            </SScoreTitle>
             <SResultContainer>
               {result.map((result, index) => {
                 return (
@@ -96,10 +96,13 @@ const SScoreContainer = styled.div`
   width: 100%;
   height: 350px;
   margin-top: 16px;
-  padding: 16px;
   border-radius: 8px;
   border: 2px dashed #ccc;
 `;
+
+const SScoreTitle = styled.h2`
+  padding: 16px 0 0 16px;
+`
 
 const SResultContainer = styled.div`
   display: flex;
@@ -108,6 +111,7 @@ const SResultContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
   margin-top: 16px;
+  overflow: scroll;
 `;
 
 const SResult = styled.div`
