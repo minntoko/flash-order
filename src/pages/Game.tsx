@@ -35,8 +35,8 @@ const Game = () => {
     try {
       const result = await fetch(
         mode === "上級者モード"
-          ? "../assets/advancedMenu.json"
-          : "../assets/beginnerMenu.json"
+          ? "/advanceMenu.json"
+          : "/beginnerMenu.json"
       );
       const json = await result.json();
       return json as Menu[];

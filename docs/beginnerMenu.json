@@ -1,0 +1,22 @@
+[
+  {
+    "foodName": "ビーフカレー",
+    "foodImage": "/foodImages/beefcurry.png"
+  },
+  {
+    "foodName": "カッツカレー",
+    "foodImage": "/foodImages/katucurry.png"
+  },
+  {
+    "foodName": "ポークカレー",
+    "foodImage": "/foodImages/pokecurry.png"
+  },
+  {
+    "foodName": "チキンカレー",
+    "foodImage": "/foodImages/chickencurry.png"
+  },
+  {
+    "foodName": "野菜カレー",
+    "foodImage": "/foodImages/yasaicurry.png"
+  }
+]

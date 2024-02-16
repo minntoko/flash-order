@@ -9,7 +9,7 @@ const Home = () => {
   const [mode, setMode] = useMode();
   const fetchAdvanceMenu = async () => {
     try {
-      const result = await fetch("src/assets/advanceMenu.json");
+      const result = await fetch("/advanceMenu.json");
       const json = await result.json();
       setMenus(json); // menusを更新
     } catch (error) {
@@ -18,7 +18,7 @@ const Home = () => {
   };
   const fetchBeginnerMenu = async () => {
     try {
-      const result = await fetch("src/assets/beginnerMenu.json");
+      const result = await fetch("/beginnerMenu.json");
       const json = await result.json();
       setMenus(json); // menusを更新
     } catch (error) {
@@ -37,7 +37,7 @@ const Home = () => {
   };
 
   useEffect(() => {
-    if(mode == "上級者モード") {
+    if (mode == "上級者モード") {
       fetchAdvanceMenu();
     } else {
       fetchBeginnerMenu();
