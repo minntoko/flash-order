@@ -165,6 +165,8 @@ const SMenuContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 16px 0 50px;
+  overflow-x: hidden;
+  overflow-y: scroll;
 `;
 
 const SMenu = styled.div`
