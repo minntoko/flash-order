@@ -308,6 +308,8 @@ Error generating stack: `+o.message+`
   justify-content: space-between;
   align-items: center;
   padding: 16px 0 50px;
+  overflow-x: hidden;
+  overflow-y: scroll;
 `,h1=z.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
