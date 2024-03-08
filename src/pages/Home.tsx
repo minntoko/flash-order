@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { Menu } from "../types/menu";
 import { useMode } from "../providers/ModeProvider";
+import Background from "../views/home/background/Background";
 
 const Home = () => {
   const [menus, setMenus] = useState<Menu[]>([]);
@@ -68,7 +69,7 @@ const Home = () => {
           </SButton>
         </SButtonContainer>
         <SMenuContainer>
-          <h2>{mode}のメニュー表</h2>
+          <SMenuTable>{mode}のメニュー表</SMenuTable>
           <SMenu>
             {menus.map((menu) => (
               <SFood key={menu.foodName}>
@@ -82,12 +83,12 @@ const Home = () => {
           </SLink>
         </SMenuContainer>
       </SMain>
+      <Background />
     </SContainer>
   );
 };
 
 const SContainer = styled.div`
-  background-color: #f4f1ec;
   height: 100vh;
   width: 100vw;
 `;
@@ -127,6 +128,7 @@ const SMain = styled.div`
   max-width: 1200px;
   height: calc(100vh - 120px);
   margin: 0 auto;
+  background-color: transparent;
 `;
 
 const SButtonContainer = styled.div`
@@ -169,6 +171,14 @@ const SMenuContainer = styled.div`
   overflow-y: scroll;
 `;
 
+const SMenuTable = styled.h2`
+  box-shadow: 0px 0px 8px #ccc;
+  color: #333;
+  background-color: #fff;
+  padding: 8px;
+  border-radius: 8px;
+`;
+
 const SMenu = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -206,6 +216,34 @@ const SFoodName = styled.p`
   text-align: center;
 `;
 
+const StartAnimation = keyframes`
+  0% {
+    transform: translateY(0);
+    scale: 1;
+    opacity: 0.8;
+  }
+  25% {
+    transform: translateY(0);
+    scale: 1;
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(-4px);
+    scale: 1.05;
+    opacity: 1;
+  }
+  75% {
+    transform: translateY(0);
+    scale: 1;
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(0);
+    scale: 1;
+    opacity: 0.8;
+  }
+`;
+
 const SLink = styled(Link)<{ selected: boolean }>`
   padding: 16px 80px;
   margin-top: 100px;
@@ -219,6 +257,7 @@ const SLink = styled(Link)<{ selected: boolean }>`
   text-decoration: none;
   transition: all 0.2s ease-in-out;
   cursor: pointer;
+  animation: ${StartAnimation} 1.8s ease-in-out infinite alternate;
   ${(props) => props.selected && "opacity: 1;"}
   &:hover {
     opacity: 1;
