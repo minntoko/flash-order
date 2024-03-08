@@ -13,7 +13,6 @@ import orderRepeat from "../views/game/utils/orderRepeat";
 import firstOrder from "../views/game/utils/firstOrder";
 import { defaultCountdown, defaultOrderCount } from "../constants/gameSetting";
 import Confirm from "../views/game/components/Confirm";
-import OpacityTransition from "../utils/OpacityTransition";
 
 const Game = () => {
   const location = useLocation();
