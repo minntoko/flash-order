@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { easeIn, motion } from "framer-motion";
 
 const OpacityTransition = ({ children }: { children: ReactNode }) => {
