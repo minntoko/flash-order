@@ -13,6 +13,7 @@ import orderRepeat from "../views/game/utils/orderRepeat";
 import firstOrder from "../views/game/utils/firstOrder";
 import { defaultCountdown, defaultOrderCount } from "../constants/gameSetting";
 import Confirm from "../views/game/components/Confirm";
+import OpacityTransition from "../utils/OpacityTransition";
 
 const Game = () => {
   const location = useLocation();
@@ -73,62 +74,64 @@ const Game = () => {
     fetchData();
   }, []);
   return (
-    <SContainer>
-      <SHeader>
-        <BackButton />
-      </SHeader>
-      <SMain>
-        <SFlex>
-          {start ? (
-            <SGameScreen>
-              {!end ? <h2>お客様のオーダー</h2> : <h2>それではご注文を復唱させていただきます</h2>}
-              <SGameArea>
-                {display && !end && (
-                  <>
-                    <SOrderCount>{orderCount}品目</SOrderCount>
-                    <SOrderText>{displayMenu.foodName}</SOrderText>
-                    <SOrderImage
-                      src={displayMenu.foodImage}
-                      alt={displayMenu.foodName}
+    <OpacityTransition>
+      <SContainer>
+        <SHeader>
+          <BackButton />
+        </SHeader>
+        <SMain>
+          <SFlex>
+            {start ? (
+              <SGameScreen>
+                {!end ? <h2>お客様のオーダー</h2> : <h2>それではご注文を復唱させていただきます</h2>}
+                <SGameArea>
+                  {display && !end && (
+                    <>
+                      <SOrderCount>{orderCount}品目</SOrderCount>
+                      <SOrderText>{displayMenu.foodName}</SOrderText>
+                      <SOrderImage
+                        src={displayMenu.foodImage}
+                        alt={displayMenu.foodName}
+                      />
+                    </>
+                  )}
+                  {!display && end && (
+                    <Confirm
+                      orderCount={state.count}
+                      inputs={inputs}
+                      setInputs={setInputs}
                     />
-                  </>
-                )}
-                {!display && end && (
-                  <Confirm
-                    orderCount={state.count}
-                    inputs={inputs}
-                    setInputs={setInputs}
-                  />
-                )}
-              </SGameArea>
-            </SGameScreen>
-          ) : (
-            <SPrepareScreen>
-              <h2>{countdown > 0 ? countdown : "GO"}</h2>
-            </SPrepareScreen>
-          )}
-          <SMemo>
-            <h2>メモ📝</h2>
-            <SMemoArea placeholder="オーダーをメモ"></SMemoArea>
-          </SMemo>
-        </SFlex>
-        <SBottomButton>
-          {end ? (
-            <SLink
-              to="/result"
-              selected={true}
-              state={{ inputs, correctMenus, "orderCount": state.count }}
-            >
-              以上でよろしいでしょうか
-            </SLink>
-          ) : (
-            <SLink to="/select" selected={true}>
-              選択画面に戻る
-            </SLink>
-          )}
-        </SBottomButton>
-      </SMain>
-    </SContainer>
+                  )}
+                </SGameArea>
+              </SGameScreen>
+            ) : (
+              <SPrepareScreen>
+                <h2>{countdown > 0 ? countdown : "GO"}</h2>
+              </SPrepareScreen>
+            )}
+            <SMemo>
+              <h2>メモ📝</h2>
+              <SMemoArea placeholder="オーダーをメモ"></SMemoArea>
+            </SMemo>
+          </SFlex>
+          <SBottomButton>
+            {end ? (
+              <SLink
+                to="/result"
+                selected={true}
+                state={{ inputs, correctMenus, "orderCount": state.count }}
+              >
+                以上でよろしいでしょうか
+              </SLink>
+            ) : (
+              <SLink to="/select" selected={true}>
+                選択画面に戻る
+              </SLink>
+            )}
+          </SBottomButton>
+        </SMain>
+      </SContainer>
+    </OpacityTransition>
   );
 };
 

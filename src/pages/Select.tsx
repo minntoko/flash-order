@@ -3,6 +3,7 @@ import styled from "styled-components";
 import BackButton from "../components/button/BackButton";
 import { SLink } from "../components/button/MainButton";
 import { SContainer } from "../components/bg/Container";
+import OpacityTransition from "../utils/OpacityTransition";
 
 const Select = () => {
   const orderTimes = [
@@ -35,48 +36,50 @@ const Select = () => {
   };
 
   return (
-    <SContainer>
-      <SHeader>
-        <BackButton />
-      </SHeader>
-      <SMain>
-        <SDecorationLine />
-        <SCenterLine>
-          <SOrderTimeContainer>
-            <SSelectTitle>注文時間/1品</SSelectTitle>
-            {orderTimes.map((orderTime) => (
-              <SButton
-                key={orderTime.time}
-                selected={orderTime.time === selectedOrderTime.time}
-                onClick={() => handleOrderTimeClick(orderTime.time)}
-              >
-                {orderTime.time}秒
-              </SButton>
-            ))}
-          </SOrderTimeContainer>
-          <SOrderCountContainer>
-            <SSelectTitle>注文数</SSelectTitle>
-            {orderCounts.map((orderCount) => (
-              <SButton
-                key={orderCount.count}
-                selected={orderCount.count === selectedOrderCount.count}
-                onClick={() => handleOrderCountClick(orderCount.count)}
-              >
-                {orderCount.count}個
-              </SButton>
-            ))}
-          </SOrderCountContainer>
-        </SCenterLine>
-        <SDecorationLine />
-        <SLink
-          to="/game"
-          selected={true}
-          state={{ ...selectedOrderTime, ...selectedOrderCount }}
-        >
-          ご注文お伺いします
-        </SLink>
-      </SMain>
-    </SContainer>
+    <OpacityTransition>
+      <SContainer>
+        <SHeader>
+          <BackButton />
+        </SHeader>
+        <SMain>
+          <SDecorationLine />
+          <SCenterLine>
+            <SOrderTimeContainer>
+              <SSelectTitle>注文時間/1品</SSelectTitle>
+              {orderTimes.map((orderTime) => (
+                <SButton
+                  key={orderTime.time}
+                  selected={orderTime.time === selectedOrderTime.time}
+                  onClick={() => handleOrderTimeClick(orderTime.time)}
+                >
+                  {orderTime.time}秒
+                </SButton>
+              ))}
+            </SOrderTimeContainer>
+            <SOrderCountContainer>
+              <SSelectTitle>注文数</SSelectTitle>
+              {orderCounts.map((orderCount) => (
+                <SButton
+                  key={orderCount.count}
+                  selected={orderCount.count === selectedOrderCount.count}
+                  onClick={() => handleOrderCountClick(orderCount.count)}
+                >
+                  {orderCount.count}個
+                </SButton>
+              ))}
+            </SOrderCountContainer>
+          </SCenterLine>
+          <SDecorationLine />
+          <SLink
+            to="/game"
+            selected={true}
+            state={{ ...selectedOrderTime, ...selectedOrderCount }}
+          >
+            ご注文お伺いします
+          </SLink>
+        </SMain>
+      </SContainer>
+    </OpacityTransition>
   );
 };
 

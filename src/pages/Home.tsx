@@ -4,6 +4,7 @@ import styled, { keyframes } from "styled-components";
 import { Menu } from "../types/menu";
 import { useMode } from "../providers/ModeProvider";
 import Background from "../views/home/background/Background";
+import OpacityTransition from "../utils/OpacityTransition";
 
 const Home = () => {
   const [menus, setMenus] = useState<Menu[]>([]);
@@ -46,45 +47,47 @@ const Home = () => {
   }, []);
 
   return (
-    <SContainer>
-      <SHeader>
-        <STitleLine />
-        <STitleBack>
-          <STitle>FlashOrder</STitle>
-        </STitleBack>
-      </SHeader>
-      <SMain>
-        <SButtonContainer>
-          <SButton
-            onClick={handleAdvanceClick}
-            selected={"上級者モード" === mode}
-          >
-            上級者モード
-          </SButton>
-          <SButton
-            onClick={handleBeginnerClick}
-            selected={"初心者モード" === mode}
-          >
-            初心者モード
-          </SButton>
-        </SButtonContainer>
-        <SMenuContainer>
-          <SMenuTable>{mode}のメニュー表</SMenuTable>
-          <SMenu>
-            {menus.map((menu) => (
-              <SFood key={menu.foodName}>
-                <SFoodImage src={menu.foodImage} alt="" />
-                <SFoodName>{menu.foodName}</SFoodName>
-              </SFood>
-            ))}
-          </SMenu>
-          <SLink to="/select" selected={true}>
-            プレイする
-          </SLink>
-        </SMenuContainer>
-      </SMain>
-      <Background />
-    </SContainer>
+    <OpacityTransition>
+      <SContainer>
+        <SHeader>
+          <STitleLine />
+          <STitleBack>
+            <STitle>FlashOrder</STitle>
+          </STitleBack>
+        </SHeader>
+        <SMain>
+          <SButtonContainer>
+            <SButton
+              onClick={handleAdvanceClick}
+              selected={"上級者モード" === mode}
+            >
+              上級者モード
+            </SButton>
+            <SButton
+              onClick={handleBeginnerClick}
+              selected={"初心者モード" === mode}
+            >
+              初心者モード
+            </SButton>
+          </SButtonContainer>
+          <SMenuContainer>
+            <SMenuTable>{mode}のメニュー表</SMenuTable>
+            <SMenu>
+              {menus.map((menu) => (
+                <SFood key={menu.foodName}>
+                  <SFoodImage src={menu.foodImage} alt="" />
+                  <SFoodName>{menu.foodName}</SFoodName>
+                </SFood>
+              ))}
+            </SMenu>
+            <SLink to="/select" selected={true}>
+              プレイする
+            </SLink>
+          </SMenuContainer>
+        </SMain>
+        <Background />
+      </SContainer>
+    </OpacityTransition>
   );
 };
 

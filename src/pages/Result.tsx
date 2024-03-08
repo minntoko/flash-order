@@ -3,6 +3,7 @@ import { SContainer } from "../components/bg/Container";
 import BackButton from "../components/button/BackButton";
 import { SLink } from "../components/button/MainButton";
 import { useLocation } from "react-router-dom";
+import OpacityTransition from "../utils/OpacityTransition";
 
 const Result = () => {
   const location = useLocation();
@@ -21,49 +22,51 @@ const Result = () => {
     }
   }
   return (
-    <SContainer>
-      <SHeader>
-        <BackButton />
-      </SHeader>
-      <SMain>
-        <SResultScreen>
-          <h1>結果</h1>
-          <SScoreContainer>
-            <SScoreTitle>
-              {orderCount}問中{correctCount}問正解です。
-            </SScoreTitle>
-            <SResultContainer>
-              {result.map((result, index) => {
-                return (
-                  <>
-                    <SResult>
-                      <div>
-                        {`${index + 1}品目:
-                      ${inputs[index + 1] ?? "オーダーが"}`}
-                      </div>
-                      {result ? (
-                        <SCorrect>正解、よくできました👏</SCorrect>
-                      ) : (
+    <OpacityTransition>
+      <SContainer>
+        <SHeader>
+          <BackButton />
+        </SHeader>
+        <SMain>
+          <SResultScreen>
+            <h1>結果</h1>
+            <SScoreContainer>
+              <SScoreTitle>
+                {orderCount}問中{correctCount}問正解です。
+              </SScoreTitle>
+              <SResultContainer>
+                {result.map((result, index) => {
+                  return (
+                    <>
+                      <SResult>
                         <div>
-                          <SIncorrect>※違います</SIncorrect>、正解は
-                          <SCorrectAnswer>
-                            {correctMenus[index + 1]}
-                          </SCorrectAnswer>
-                          です
+                          {`${index + 1}品目:
+                        ${inputs[index + 1] ?? "オーダーが"}`}
                         </div>
-                      )}
-                    </SResult>
-                  </>
-                );
-              })}
-            </SResultContainer>
-          </SScoreContainer>
-        </SResultScreen>
-        <SLink to="/select" selected={true}>
-          選択画面に戻る
-        </SLink>
-      </SMain>
-    </SContainer>
+                        {result ? (
+                          <SCorrect>正解、よくできました👏</SCorrect>
+                        ) : (
+                          <div>
+                            <SIncorrect>※違います</SIncorrect>、正解は
+                            <SCorrectAnswer>
+                              {correctMenus[index + 1]}
+                            </SCorrectAnswer>
+                            です
+                          </div>
+                        )}
+                      </SResult>
+                    </>
+                  );
+                })}
+              </SResultContainer>
+            </SScoreContainer>
+          </SResultScreen>
+          <SLink to="/select" selected={true}>
+            選択画面に戻る
+          </SLink>
+        </SMain>
+      </SContainer>
+    </OpacityTransition>
   );
 };
 
