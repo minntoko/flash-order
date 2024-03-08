@@ -30,14 +30,14 @@ const Game = () => {
     foodName: "",
     foodImage: "src/assets/foodImages/default.jpeg",
   });
-  const [correctMenus, setCorrectMenus] = useState<{ [key: number]: string }>([]);
+  const [correctMenus, setCorrectMenus] = useState<{ [key: number]: string }>(
+    []
+  );
 
   const fetchMenu: () => Promise<Menu[] | undefined> = async () => {
     try {
       const result = await fetch(
-        mode === "上級者モード"
-          ? "/advanceMenu.json"
-          : "/beginnerMenu.json"
+        mode === "上級者モード" ? "/advanceMenu.json" : "/beginnerMenu.json"
       );
       const json = await result.json();
       return json as Menu[];
@@ -74,64 +74,66 @@ const Game = () => {
     fetchData();
   }, []);
   return (
-    <OpacityTransition>
-      <SContainer>
-        <SHeader>
-          <BackButton />
-        </SHeader>
-        <SMain>
-          <SFlex>
-            {start ? (
-              <SGameScreen>
-                {!end ? <h2>お客様のオーダー</h2> : <h2>それではご注文を復唱させていただきます</h2>}
-                <SGameArea>
-                  {display && !end && (
-                    <>
-                      <SOrderCount>{orderCount}品目</SOrderCount>
-                      <SOrderText>{displayMenu.foodName}</SOrderText>
-                      <SOrderImage
-                        src={displayMenu.foodImage}
-                        alt={displayMenu.foodName}
-                      />
-                    </>
-                  )}
-                  {!display && end && (
-                    <Confirm
-                      orderCount={state.count}
-                      inputs={inputs}
-                      setInputs={setInputs}
+    <SContainer>
+      <SHeader>
+        <BackButton />
+      </SHeader>
+      <SMain>
+        <SFlex>
+          {start ? (
+            <SGameScreen>
+              {!end ? (
+                <h2>お客様のオーダー</h2>
+              ) : (
+                <h2>それではご注文を復唱させていただきます</h2>
+              )}
+              <SGameArea>
+                {display && !end && (
+                  <>
+                    <SOrderCount>{orderCount}品目</SOrderCount>
+                    <SOrderText>{displayMenu.foodName}</SOrderText>
+                    <SOrderImage
+                      src={displayMenu.foodImage}
+                      alt={displayMenu.foodName}
                     />
-                  )}
-                </SGameArea>
-              </SGameScreen>
-            ) : (
-              <SPrepareScreen>
-                <h2>{countdown > 0 ? countdown : "GO"}</h2>
-              </SPrepareScreen>
-            )}
-            <SMemo>
-              <h2>メモ📝</h2>
-              <SMemoArea placeholder="オーダーをメモ"></SMemoArea>
-            </SMemo>
-          </SFlex>
-          <SBottomButton>
-            {end ? (
-              <SLink
-                to="/result"
-                selected={true}
-                state={{ inputs, correctMenus, "orderCount": state.count }}
-              >
-                以上でよろしいでしょうか
-              </SLink>
-            ) : (
-              <SLink to="/select" selected={true}>
-                選択画面に戻る
-              </SLink>
-            )}
-          </SBottomButton>
-        </SMain>
-      </SContainer>
-    </OpacityTransition>
+                  </>
+                )}
+                {!display && end && (
+                  <Confirm
+                    orderCount={state.count}
+                    inputs={inputs}
+                    setInputs={setInputs}
+                  />
+                )}
+              </SGameArea>
+            </SGameScreen>
+          ) : (
+            <SPrepareScreen>
+              <h2>{countdown > 0 ? countdown : "GO"}</h2>
+            </SPrepareScreen>
+          )}
+          <SMemo>
+            <h2>メモ📝</h2>
+            <SMemoArea placeholder="オーダーをメモ"></SMemoArea>
+          </SMemo>
+        </SFlex>
+        <SBottomButton>
+          {end ? (
+            <SLink
+              to="/result"
+              selected={true}
+              state={{ inputs, correctMenus, orderCount: state.count }}
+            >
+              以上でよろしいでしょうか
+            </SLink>
+          ) : (
+            <SLink to="/select" selected={true}>
+              選択画面に戻る
+            </SLink>
+          )}
+        </SBottomButton>
+      </SMain>
+    </SContainer>
   );
 };
 

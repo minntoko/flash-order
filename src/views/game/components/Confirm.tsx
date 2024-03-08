@@ -27,6 +27,11 @@ const Confirm = ({ orderCount, inputs, setInputs }: Props) => {
       return prev - 1;
     });
   };
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
+      clickNext();
+    }
+  };
   return (
     <>
       <STitle>{confirmCount}品目</STitle>
@@ -39,6 +44,7 @@ const Confirm = ({ orderCount, inputs, setInputs }: Props) => {
               <SInput
                 type="text"
                 onChange={(e) => setInputs({ ...inputs, [id]: e.target.value })}
+                onKeyDown={handleKeyPress}
                 value={inputs[id] || ""}
               />
               がお一つ
